@@ -4,3 +4,7 @@ needed to run the project !!!
 - eclipse-jee-2020-06-R-win32-x86_64
 - wildfly-10.0.0.Final
 - jdk-8u202-windows-x64
+
+mail used :
+btkwebproject@gmail.com
+25819166btk
