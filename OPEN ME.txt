@@ -1,0 +1,6 @@
+needed to run the project !!!
+
+- com.mysql.jdbc_5.1.5.jar
+- eclipse-jee-2020-06-R-win32-x86_64
+- wildfly-10.0.0.Final
+- jdk-8u202-windows-x64
