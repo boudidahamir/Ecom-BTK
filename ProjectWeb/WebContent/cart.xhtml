@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>cart</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<f:metadata>
+			<f:viewAction action="#{loginBean.Security()}" />
+			<f:viewAction action="#{loginBean.testclient()}" />
+		</f:metadata>
+	</h:form>
+	<ui:include src="navbar.xhtml" />
+	<h:form>
+		<b:commandButton value="clear"
+			action="#{cartBean.deletecart(loginBean.user.id)}" look="danger" />
+	</h:form>
+
+	<h2 align="center">cart</h2>
+
+
+	<h:form id="formcart">
+
+		<ui:repeat
+			value="#{cartBean.combineLists(cartBean.testGetDataCart(loginBean.user.id),cartBean.testGetDataProd(loginBean.user.id))}"
+			var="prod">
+			<b:row>
+				<h:graphicImage
+					value="data:image/png;base64,#{productBean.getImageBase64(prod.second.id)}"
+					alt="no picture added" width="200" height="200" />
+				<h:outputText id="Name" value=" #{prod.second.name} " />
+				<h:outputText id="price"
+					value="#{prod.second.price*prod.first.count}" />
+
+				<b:commandButton value="+"
+					action="#{cartBean.addtocart(loginBean.user.id,prod.second.id)}"
+					look="success" ajax="false" update=":formcart"/>
+				<h:outputText id="unit" value="x#{prod.first.count}  " />
+				<b:commandButton value="-"
+					action="#{cartBean.substructfromcart(loginBean.user.id,prod.second.id)}"
+					look="danger" ajax="false" update=":formcart" />
+			</b:row>
+			<hr></hr>
+		</ui:repeat>
+		<b:commandButton value="clear"
+			action="#{cartBean.deletecart(loginBean.user.id)}" look="danger" />
+		<b:commandButton value="Purchase"
+			action="#{commBean.addCommande(loginBean.user.id,cartBean.testGetDataCart(loginBean.user.id).get(0).getId())}"
+			look="primary" />
+	</h:form>
+
+	<ui:include src="footer.xhtml" />
+</h:body>
+
+</html>

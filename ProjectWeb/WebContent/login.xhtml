@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Ecommerce Login</title>
+</h:head>
+
+<h:body>
+
+	<div class="container">
+		<div class="jumbotron text-center">
+			<h1>Welcome to Our Ecommerce Website</h1>
+		</div>
+
+		<div class="row justify-content-md-center">
+			<div class="col-md-4">
+				<b:form>
+					<h2 class="text-center">Login to Your Account</h2>
+					<b:messages escape="false" />
+					<b:inputText label="username:" id="username"
+						value="#{loginBean.uname}" styleClass="form-control mb-3" />
+					<b:inputSecret label="password:" id="password"
+						value="#{loginBean.pwd}" styleClass="form-control mb-3" />
+
+					<div class="text-center">
+						<b:commandButton value="Login" action="#{loginBean.login}"
+							look="primary" />
+						<b:commandButton value="signup"
+							action="signup.xhtml?faces-redirect=true" look="warning" />
+					</div>
+
+				</b:form>
+				<div>
+					<h:link value="Forgot password?" outcome="fgtpwdemail.xhtml"></h:link>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ui:include src="footer.xhtml" />
+</h:body>
+</html>

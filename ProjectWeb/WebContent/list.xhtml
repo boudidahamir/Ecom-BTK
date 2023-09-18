@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Employees List</title>
+</h:head>
+
+<h:body>
+	<ui:include src="sidenav.xhtml" />
+
+	<b:column span="10">
+		<h2>Employees List</h2>
+		<h:form>
+			<f:metadata>
+				<f:viewAction action="#{loginBean.Security()}" />
+				<f:viewAction action="#{loginBean.testadmin()}" />
+			</f:metadata>
+		</h:form>
+
+		<h:form>
+			<div class="form-group">
+				<b:inputText placeholder="search..." id="search"
+					value="#{loginBean.search}" styleClass="form-control mb-3" />
+			</div>
+
+			<b:row>
+				<ui:repeat value="#{loginBean.testGetData()}" var="user"
+					varStatus="loop">
+					<b:column col-md="4">
+						<h:outputLabel for="firstName" value="First Name:" />
+						<h:outputText id="firstName" value="#{user.fname}" />
+						<br />
+						<h:outputLabel for="lastName" value="Last Name:" />
+						<h:outputText id="lastName" value="#{user.lname}" />
+						<br />
+						<h:outputLabel for="address" value="Address:" />
+						<h:outputText id="address" value="#{user.adress}" />
+						<br />
+						<h:outputLabel for="role" value="Role:" />
+						<h:outputText id="role" value="#{user.role}" />
+						<br />
+						<h:outputLabel for="telephone" value="Telephone:" />
+						<h:outputText id="telephone" value="#{user.tel}" />
+						<br />
+						<h:outputLabel for="username" value="Username:" />
+						<h:outputText id="username" value="#{user.uname}" />
+						<br />
+						<b:commandButton value="Delete"
+							action="#{loginBean.deleteuser(user.id)}" look="danger" />
+						<br />
+						<br />
+					</b:column>
+
+					<ui:fragment rendered="#{loop.index % 3 == 2 or loop.last}">
+						<b:row rendered="#{not loop.last}">
+						</b:row>
+					</ui:fragment>
+				</ui:repeat>
+			</b:row>
+
+		</h:form>
+
+		<ui:include src="footer.xhtml" />
+	</b:column>
+</h:body>
+
+</html>

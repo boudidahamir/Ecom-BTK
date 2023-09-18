@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<b:column span="2">
+	<b:navBar fixed="left" style="height: 100vh;">
+		<b:row>
+			<b:navbarLinks>
+				<b:navLink value="Home" href="#" />
+			</b:navbarLinks>
+		</b:row>
+		<b:row>
+			<b:navbarLinks>
+				<b:navLink value="Add admin" href="addAdmin.xhtml" />
+			</b:navbarLinks>
+		</b:row>
+		<b:row>
+			<b:navbarLinks>
+				<b:navLink value="All users" href="list.xhtml" />
+			</b:navbarLinks>
+		</b:row>
+		<b:row>
+			<b:navbarLinks>
+				<b:navLink value="Add Products" href="addProduct.xhtml" />
+			</b:navbarLinks>
+		</b:row>
+		<b:row>
+			<b:navbarLinks>
+				<b:navLink value="list Products" href="listproductAdmin.xhtml" />
+			</b:navbarLinks>
+		</b:row>
+		<b:row>
+			<b:navbarLinks>
+				<b:navLink value="list commande" href="listecommande.xhtml" />
+			</b:navbarLinks>
+		</b:row>
+		<b:row>
+			<b:navbarLinks>
+				<b:navLink value="Contact" href="#" />
+			</b:navbarLinks>
+		</b:row>
+		<b:row style="position: absolute; bottom: 0; ">
+			<b:row>
+				<b:navbarLinks>
+					<b:navLink href="profileBack.xhtml"
+						style="display: flex; align-items: center;">
+						<b:icon value="user" size="lg" style="margin-right: 5px;"></b:icon>
+						<span>Profile</span>
+					</b:navLink>
+				</b:navbarLinks>
+			</b:row>
+			<b:row>
+				<h:form>
+					<b:navbarLinks>
+						<b:navCommandLink value="logout" action="#{loginBean.logout()}"
+							style="color: red;">
+						</b:navCommandLink>
+					</b:navbarLinks>
+				</h:form>
+			</b:row>
+		</b:row>
+	</b:navBar>
+</b:column>
+</html>

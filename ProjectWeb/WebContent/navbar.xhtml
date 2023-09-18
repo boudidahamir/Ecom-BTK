@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<b:navBar brand="Brand" brandHref="#" fluid="true">
+
+	<b:navbarLinks>
+		<b:navLink value="Products" href="listproduct.xhtml"></b:navLink>
+		<b:navLink value="Link" href="#"></b:navLink>
+		<b:dropMenu value="Dropdown" iconAwesome="birthday-cake">
+			<b:navLink value="Action" href="#"></b:navLink>
+			<b:navLink value="Another action" href="#"></b:navLink>
+			<b:navLink value="Something else here" href="#"></b:navLink>
+			<b:navLink></b:navLink>
+			<b:navLink header="Nav header"></b:navLink>
+			<b:navLink value="Separated link" href="#"></b:navLink>
+			<b:dropMenu value="Nested submenu" iconAwesome="birthday-cake"
+				iconAlign="right">
+				<b:navLink value="You can nest menus" href="#"></b:navLink>
+				<b:dropMenu value="Nested sub-submenu">
+					<b:navLink value="... as deep as ..." href="#"></b:navLink>
+					<b:dropMenu value="Nested sub-sub-submenu">
+						<b:navLink value="... you want!" href="#"></b:navLink>
+					</b:dropMenu>
+				</b:dropMenu>
+			</b:dropMenu>
+			<b:navLink value="One more separated link" href="#"></b:navLink>
+		</b:dropMenu>
+	</b:navbarLinks>
+
+	<b:navbarLinks pull="right" styleClass="hidden-md hidden-sm hidden-xs">
+		<h:form class="navbar-form">
+			<b:commandButton action="#{loginBean.logout()}" value="logout" />
+		</h:form>
+	</b:navbarLinks>
+
+	<b:navbarLinks pull="right" styleClass="hidden-xs">
+
+		<b:navLink value="" href="profile.xhtml">
+			<b:icon value="user" size="lg" />
+		</b:navLink>
+
+		<b:dropMenu value="" visible="lg" iconAwesome="shopping-cart">
+			<h:form id="formcartbar">
+
+
+				<ui:repeat
+					value="#{cartBean.combineLists(cartBean.testGetDataCart(loginBean.user.id),cartBean.testGetDataProd(loginBean.user.id))}"
+					var="prod">
+
+					<b:row>
+						<b:column>
+							<h:outputText id="unit" value="#{prod.first.count}x" />
+							<h:graphicImage
+								value="data:image/png;base64,#{productBean.getImageBase64(prod.second.id)}"
+								alt="no picture added" width="20" height="20" />
+							<h:outputText id="Name" value="#{prod.second.name}" />
+							<h:outputText id="price"
+								value=" #{prod.second.price*prod.first.count}" />
+							<b:commandButton value="+"
+								action="#{cartBean.addtocart(loginBean.user.id,prod.second.id)}"
+								look="success" size="xs" ajax="false" update=":formcartbar"/>
+							<b:commandButton value="-"
+								action="#{cartBean.substructfromcart(loginBean.user.id,prod.second.id)}"
+								look="danger" size="xs" ajax="false" update=":formcartbar"/>
+						</b:column>
+					</b:row>
+					<hr></hr>
+				</ui:repeat>
+				<b:commandButton value="go to cart" action="cart.xhtml"></b:commandButton>
+				<b:commandButton value="clear"
+					action="#{cartBean.deletecart(loginBean.user.id)}" look="danger" />
+
+
+
+			</h:form>
+		</b:dropMenu>
+
+	</b:navbarLinks>
+</b:navBar>
+</html>

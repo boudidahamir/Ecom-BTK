@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Add Products</title>
+</h:head>
+<h:body>
+	<ui:include src="sidenav.xhtml" />
+	<b:column span="2">
+		<div class="container mt-5">
+			<h2>Add Products</h2>
+
+			<h:form enctype="multipart/form-data">
+				<f:metadata>
+					<f:viewAction action="#{loginBean.Security()}" />
+					<f:viewAction action="#{loginBean.testadmin()}" />
+				</f:metadata>
+				<b:messages escape="false" />
+
+				<div class="mb-3">
+					<label for="name" class="form-label">name:</label>
+
+					<h:inputText id="name" name="name" value="#{productBean.name}"
+						class="form-control" />
+
+				</div>
+				<div class="mb-3">
+					<label for="description" class="form-label">description:</label>
+					<h:inputText id="description" name="description"
+						value="#{productBean.description}" class="form-control" />
+
+				</div>
+				<div class="mb-3">
+					<label for="stock" class="form-label">stock:</label>
+					<h:inputText id="stock" name="stock" value="#{productBean.unit}"
+						class="form-control" />
+				</div>
+
+				<div class="mb-3">
+					<label for="image" class="form-label">image:</label>
+					<h:inputFile id="image" name="image"
+						value="#{productBean.imagePart}" class="form-control"
+						required="true" requiredMessage="Please upload a file" />
+				</div>
+				<div>
+					<b:commandButton value="Add" action="#{productBean.addProduct()}"
+						look="primary"></b:commandButton>
+				</div>
+			</h:form>
+		</div>
+		<ui:include src="footer.xhtml" />
+	</b:column>
+</h:body>
+</html>

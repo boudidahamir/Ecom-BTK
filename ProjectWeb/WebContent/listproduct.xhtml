@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>product List</title>
+</h:head>
+
+<h:body>
+<b:row id="cartList">
+	<ui:include src="navbar.xhtml" />
+</b:row>
+	<h2 align="center">product List</h2>
+	<h:form>
+		<f:metadata>
+			<f:viewAction action="#{loginBean.Security()}" />
+			<f:viewAction action="#{loginBean.testclient()}" />
+		</f:metadata>
+	</h:form>
+
+	<h:form>
+		<b:row>
+			<div class="form-group">
+				<b:inputText placeholder="search..." id="search"
+					value="#{productBean.search}" styleClass="form-control mb-3"
+					span="3" offset="5" />
+			</div>
+		</b:row>
+		<b:row>
+			<ui:repeat value="#{productBean.listProd}" var="prod"
+				varStatus="loop">
+
+				<b:column col-md="1" offset="1">
+					<h:graphicImage
+						value="data:image/png;base64,#{productBean.getImageBase64(prod.id)}"
+						alt="no picture added" width="200" height="200" />
+					<br />
+					<h:outputLabel for="Name" value="Name:" />
+					<h:outputText id="Name" value="#{prod.name}" />
+					<br />
+					<h:outputLabel for="description" value="description:" />
+					<h:outputText id="description" value="#{prod.description}" />
+					<br />
+					<h:outputLabel for="price" value="price" />
+					<h:outputText id="price" value="#{prod.price}" />
+					<br />
+					<h:outputLabel for="unit" value="unit:" />
+					<h:outputText id="unit" value="#{prod.unit}" />
+
+					<b:commandButton value="Add to cart"
+						action="#{cartBean.addtocart(loginBean.user.id,prod.id)}"
+						look="danger" ajax="false" update="cartList"></b:commandButton>
+					<br />
+					<br />
+				</b:column>
+				<ui:fragment rendered="#{loop.index % 5 == 4 or loop.last}">
+					<b:row rendered="#{not loop.last}">
+					</b:row>
+				</ui:fragment>
+			</ui:repeat>
+		</b:row>
+	</h:form>
+
+	<ui:include src="footer.xhtml" />
+</h:body>
+
+</html>

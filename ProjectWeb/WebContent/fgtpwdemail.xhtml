@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Update Password</title>
+</h:head>
+
+<h:body>
+
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-4">
+				<b:form>
+
+					<h2 class="text-center">update Password</h2>
+					<b:messages escape="false" />
+					<b:inputText label="new password" id="pwd"
+						value="#{fgtPwdBean.uname}" styleClass="form-control mb-3" />
+
+					<div class="text-center">
+						<b:commandButton value="update"
+							action="#{fgtPwdBean.sendrequest()}" look="primary" />
+					</div>
+				</b:form>
+			</div>
+		</div>
+	</div>
+	<ui:include src="footer.xhtml" />
+</h:body>
+</html>

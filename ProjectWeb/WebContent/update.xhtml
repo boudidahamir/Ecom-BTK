@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Update</title>
+</h:head>
+<h:body>
+	<form>
+		<div class="container mt-5">
+			<h2>Update</h2>
+			<h:form>
+				<f:metadata>
+					<f:viewAction action="#{loginBean.Security()}" />
+				</f:metadata>
+				<b:messages escape="false" />
+				<div class="mb-3">
+					<label for="fname" class="form-label">First name:</label>
+					<h:inputText id="fname" name="fname"
+						value="#{loginBean.user.fname}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label for="lname" class="form-label">Last name:</label>
+					<h:inputText id="lname" name="lname"
+						value="#{loginBean.user.lname}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label for="adress" class="form-label">adress:</label>
+					<h:inputText id="adress" name="adress"
+						value="#{loginBean.user.adress}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label for="tel" class="form-label">telephone:</label>
+					<h:inputText id="tel" name="tel" value="#{loginBean.user.tel}"
+						class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label">email:</label>
+					<h:inputText id="email" name="email"
+						value="#{loginBean.user.uname}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label">Password:</label>
+					<b:commandButton value="change" action="#{loginBean.updatePwd()}"
+						look="primary"></b:commandButton>
+				</div>
+				<b:commandButton value="back" action="#{loginBean.updateGoBack()}"
+					look="primary"></b:commandButton>
+				<b:commandButton value="update" action="#{loginBean.updateuser1()}"
+					look="primary"></b:commandButton>
+
+
+			</h:form>
+		</div>
+	</form>
+	<ui:include src="footer.xhtml" />
+</h:body>
+</html>

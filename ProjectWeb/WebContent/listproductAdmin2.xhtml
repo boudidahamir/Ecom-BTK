@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Product List</title>
+</h:head>
+
+<h:body>
+	<ui:include src="sidenav.xhtml" />
+
+	<b:column span="10">
+		<h2>product List</h2>
+		<h:form>
+			<f:metadata>
+				<f:viewAction action="#{loginBean.Security()}" />
+				<f:viewAction action="#{loginBean.testadmin()}" />
+			</f:metadata>
+		</h:form>
+
+		<h:form>
+			<div class="form-group">
+				<b:inputText placeholder="search..." id="search"
+					value="#{productBean.search}" styleClass="form-control mb-3" onkeypress="#{productBean.OnInit()}"/>
+			</div>
+		</h:form>
+
+
+
+		<h:form enctype="multipart/form-data" id="formdata">
+
+			<ui:repeat value="#{productBean.listProd}" var="prod"
+				varStatus="loop">
+				<b:column col-md="3">
+					<h:graphicImage
+						value="data:image/png;base64,#{productBean.getImageBase64(prod.id)}"
+						alt="no picture added" width="100" height="100" />
+					<br />
+					<h:outputLabel for="Name" value="Name:" />
+					<h:outputText id="Name2" value="#{prod.name}" />
+					<br />
+					<h:outputLabel for="description" value="description:" />
+					<h:outputText id="description2" value="#{prod.description}" />
+					<br />
+					<h:outputLabel for="unit" value="unit:" />
+					<h:outputText id="unit2" value="#{prod.unit}" />
+					<br />
+					<h:outputLabel for="price" value="price" />
+					<h:outputText id="price2" value="#{prod.price}" />
+					<br />
+
+					<b:commandButton value="Show Modal" id="commB"
+						oncomplete="runModal();" look="primary">
+						<f:ajax render="@none"></f:ajax>
+						<f:setPropertyActionListener value="#{prod}"
+							target="#{productBean.prod}"></f:setPropertyActionListener>
+					</b:commandButton>
+
+					<b:commandButton value="DELETE"
+						action="#{productBean.deleteProduct(prod.id)}" update=":formdata"
+						look="danger"></b:commandButton>
+
+					<br />
+					<br />
+				</b:column>
+
+
+				<ui:fragment rendered="#{loop.index % 4 == 3 or loop.last}">
+					<b:row rendered="#{not loop.last}">
+					</b:row>
+				</ui:fragment>
+				
+			</ui:repeat>
+			
+		</h:form>
+
+
+
+		<h:form id="formmodal" enctype="multipart/form-data">
+
+			<b:modal id="amodal" title="Modal Example"
+				styleClass="modalPseudoClass">
+
+				<div class="mb-3">
+					<label for="name" class="form-label">name:</label>
+
+					<h:inputText id="name" name="name" value="#{productBean.prod.name}"
+						class="form-control" />
+
+				</div>
+				<div class="mb-3">
+					<label for="description" class="form-label">description:</label>
+					<h:inputText id="description" name="description"
+						value="#{productBean.prod.description}" class="form-control" />
+
+				</div>
+				<div class="mb-3">
+					<label for="stock" class="form-label">stock:</label>
+					<h:inputText id="stock" name="stock"
+						value="#{productBean.prod.unit}" class="form-control" />
+				</div>
+
+				<div class="mb-3">
+					<label for="price" class="form-label">price:</label>
+					<h:inputText id="price" name="price"
+						value="#{productBean.prod.price}" class="form-control" />
+				</div>
+
+				<div class="mb-3">
+					<label for="image" class="form-label">image:</label>
+					<h:inputFile id="image" name="image"
+						value="#{productBean.imagePart}" class="form-control" />
+				</div>
+				<div>
+					<b:commandButton value="Update"
+						action="#{productBean.updateProduct1()}" look="primary"></b:commandButton>
+				</div>
+
+
+
+
+			</b:modal>
+
+		</h:form>
+
+
+		<h:form>
+
+			<b:remoteCommand name="runModal" ajax="false"
+				action="#{productBean.afficher()}" update=":formmodal:amodal"
+				oncomplete="$('.modalPseudoClass').modal();"></b:remoteCommand>
+
+		</h:form>
+
+		<ui:include src="footer.xhtml" />
+	</b:column>
+</h:body>
+
+</html>
